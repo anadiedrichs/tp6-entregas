@@ -13,9 +13,9 @@ background(0);
 print(Serial.list());
 puertoSerie = new Serial(this, Serial.list()[1], 9600);
 }
+//Funciones cuando se hace click sobre los botones de la interfaz
 void mousePressed()
 {
-// Puedes agregar acciones específicas cuando se presionan los botones
 if (mouseX > 270 && mouseX < 400 && mouseY > 200 && mouseY < 250)
  {
    Entrada1Presionada=true;
@@ -34,6 +34,7 @@ if (mouseX > 270 && mouseX < 400 && mouseY > 200 && mouseY < 250)
    print("ON2\n");
  }
 }
+
 void draw()
 {
 fill(0, 0, 255);
@@ -68,6 +69,7 @@ ellipse(500, 325, 80, 80);//Salida 2
 fill(0);
 textSize(40);
 text("S2", 500, 325);//texto del boton circular 2
+//Se reciben los estados de los botones fisicos por el puerto serie
 if(Entrada1Presionada == false && Entrada2Presionada == false)
 {
 if (puertoSerie.available() > 0)
@@ -86,6 +88,7 @@ if (puertoSerie.available() > 0)
     }
   }
 }
+//Funciones para los botones fisicos
 }
 void boton1(int estadoBoton1)
 {
@@ -113,6 +116,7 @@ void boton2 (int estadoBoton2)
     colorEntrada2 = color(255);
   }
 }
+//Funcion que se ejecuta cuando se deja de presionar el click
 void mouseReleased()
 {
   Entrada1Presionada=false;
