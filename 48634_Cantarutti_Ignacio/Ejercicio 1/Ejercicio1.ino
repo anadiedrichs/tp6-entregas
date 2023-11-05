@@ -28,12 +28,11 @@ void loop() {
         led1Encendido = true;
       }
     }
-    // Si PULSADOR2 está presionado y LED2 no está encendido, inicia LED1 en su brillo máximo y disminuye
+    // Si PULSADOR2 está presionado y LED2 no está encendido, apaga LED1
     if (digitalRead(PULSADOR2) == LOW && !led2Encendido) {
-      analogWrite(LED1, 255);
-      if (brilloLED1 > 0) {
-        brilloLED1 -= incremento;
-      }
+      analogWrite(LED1, 0);
+      brilloLED1 = 0; // Asegura que el brillo de LED1 sea 0
+      led1Encendido = false; // Asegura que LED1 esté apagado
     }
   }
   // Si el LED actual es el 2
@@ -45,12 +44,11 @@ void loop() {
         led2Encendido = true;
       }
     }
-    // Si PULSADOR2 está presionado y LED1 no está encendido, inicia LED2 en su brillo máximo y disminuye
+    // Si PULSADOR2 está presionado y LED1 no está encendido, apaga LED2
     if (digitalRead(PULSADOR2) == LOW && !led1Encendido) {
-      analogWrite(LED2, 255);
-      if (brilloLED2 > 0) {
-        brilloLED2 -= incremento;
-      }
+      analogWrite(LED2, 0);
+      brilloLED2 = 0; // Asegura que el brillo de LED2 sea 0
+      led2Encendido = false; // Asegura que LED2 esté apagado
     }
   }
 
@@ -59,6 +57,9 @@ void loop() {
     ledActual = (ledActual == 1) ? 2 : 1;
     led1Encendido = false;
     led2Encendido = false;
+    // Apaga ambos LEDs al cambiar el LED actual
+    analogWrite(LED1, 0);
+    analogWrite(LED2, 0);
   }
 
   // Aplica el brillo a los LEDs correspondientes
